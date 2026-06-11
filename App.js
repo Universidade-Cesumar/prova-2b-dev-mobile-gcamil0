@@ -11,6 +11,21 @@ export default function App() {
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
+  // busca os materiais cadastrados na api
+  const buscarMateriais = async () => {
+    try {
+      const resposta = await fetch(API_URL);
+      const dados = await resposta.json();
+      setMateriais(dados);
+    } catch (erro) {
+      console.log('erro ao buscar materiais:', erro);
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Almoxarifado - Enfermagem</Text>

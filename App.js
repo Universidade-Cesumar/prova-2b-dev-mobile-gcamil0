@@ -101,6 +101,7 @@ export default function App() {
         ) : (
           <FlatList
             ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
+            ListEmptyComponent={<Text style={styles.listaVazia}>Nenhum material cadastrado.</Text>}
             testID="lista-materiais"
             data={materiais}
             keyExtractor={(item) => item.id}

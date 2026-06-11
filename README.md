@@ -53,3 +53,11 @@ prova-2b-dev-mobile-gcamil0/
 ├── tests/          # testes automatizados
 │   └── sprint1.test.js
 └── assets/             # imagens e ícones
+
+## Funcionalidades da Sprint 1
+
+- [x] Formulário de cadastro de materiais (nome e quantidade)
+- [x] Listagem de materiais em tempo real via FlatList
+- [x] Integração com MockAPI (GET e POST)
+- [x] Carregamento com ActivityIndicator
+- [x] Validação básica dos campos antes de enviar

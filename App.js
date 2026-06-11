@@ -105,7 +105,7 @@ export default function App() {
             ItemSeparatorComponent={() => <View style={styles.separador} />}
             testID="lista-materiais"
             data={materiais}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.item}>
                 <Text style={styles.itemNome}>{item.nome}</Text>

@@ -24,10 +24,40 @@ export default function App() {
     }
   };
 
-    // executa a busca assim que o app abre
-    useEffect(() => {
+  // salva novo material na api
+  const cadastrarMaterial = async () => {
+    if (!nome || !quantidade) {
+      alert('Preencha o nome e a quantidade!');
+      return;
+    }
+
+    try {
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: nome,
+          quantidade: parseInt(quantidade, 10),
+        }),
+      });
+
+      // limpa os campos depois de cadastrar
+      setNome('');
+      setQuantidade('');
+
+      // atualiza lista depois de cadastrar
       buscarMateriais();
-    }, []);
+    } catch (erro) {
+      console.log('erro ao cadastrar material:', erro);
+    }
+  };
+
+  // executa a busca assim que o app abre
+  useEffect(() => {
+    buscarMateriais();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -61,7 +91,7 @@ export default function App() {
         />
 
         {/* botão para cadastrar o material */}
-        <TouchableOpacity testID="btn-cadastrar" style={styles.botao}>
+        <TouchableOpacity testID="btn-cadastrar" style={styles.botao} onPress={cadastrarMaterial}>
           <Text style={styles.botaoTexto}>Cadastrar</Text>
         </TouchableOpacity>
 
@@ -108,12 +138,12 @@ const styles = StyleSheet.create({
     marginBottom: 30, // Margem inferior para afastar o texto dos futuros inputs dos alunos
   },
   input: {
-  borderWidth: 1,
-  borderColor: '#ccc',
-  borderRadius: 8,
-  padding: 10,
-  marginBottom: 10,
-  fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+    fontSize: 16,
   },
   botao: {
     backgroundColor: '#2a7ae2',

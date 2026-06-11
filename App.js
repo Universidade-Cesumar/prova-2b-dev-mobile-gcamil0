@@ -102,6 +102,7 @@ export default function App() {
           <FlatList
             ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
             ListEmptyComponent={<Text style={styles.listaVazia}>Nenhum material cadastrado.</Text>}
+            ItemSeparatorComponent={() => <View style={styles.separador} />}
             testID="lista-materiais"
             data={materiais}
             keyExtractor={(item) => item.id}
@@ -179,5 +180,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 8,
+  },
+  listaVazia: {
+    textAlign: 'center',
+    color: '#aaa',
+    marginTop: 20,
+  },
+  separador: {
+    height: 1,
+    backgroundColor: '#eee',
   },
 });

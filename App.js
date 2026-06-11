@@ -22,6 +22,47 @@ export default function App() {
       </Text>
 
       {/* Os alunos vão construir os componentes visuais das Sprints aqui dentro */}
+
+        {/* campo para digitar o nome do material */}
+        <TextInput
+          testID="input-nome"
+          style={styles.input}
+          placeholder="Nome do material"
+          value={nome}
+          onChangeText={setNome}
+        />
+
+        {/* campo para digitar a quantidade */}
+        <TextInput
+          testID="input-quantidade"
+          style={styles.input}
+          placeholder="Quantidade"
+          value={quantidade}
+          onChangeText={setQuantidade}
+          keyboardType="numeric"
+        />
+
+        {/* botão para cadastrar o material */}
+        <TouchableOpacity testID="btn-cadastrar" style={styles.botao}>
+          <Text style={styles.botaoTexto}>Cadastrar</Text>
+        </TouchableOpacity>
+
+        {/* mostra um indicador enquanto carrega, senão mostra a lista */}
+        {carregando ? (
+          <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />
+        ) : (
+          <FlatList
+            testID="lista-materiais"
+            data={materiais}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={styles.item}>
+                <Text style={styles.itemNome}>{item.nome}</Text>
+                <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+              </View>
+            )}
+          />
+        )}
       
     </View>
   );

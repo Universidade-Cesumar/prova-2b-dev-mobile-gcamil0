@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 
+const API_URL = 'https://6a2b3903b687a7d5cbc4f932.mockapi.io/api/v1/materiais';
+
 export default function App() {
   // --- Estados da Aplicação ---
   const [nome, setNome] = useState(''); // estado para o campo do nome do materila 
   const [quantidade, setQuantidade] = useState(''); // estado para o campo da qtd do material
   const [materiais, setMateriais] = useState([]); // lista de materiais
   const [carregando, setCarregando] = useState(true); // controla se está carregando os dados
-  const API_URL = 'https://6a2b3903b687a7d5cbc4f932.mockapi.io/api/v1/materiais';
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
@@ -41,7 +42,7 @@ export default function App() {
           quantidade: parseInt(quantidade, 10),
         }),
       });
-      
+
       // limpa os campos depois de cadastrar
       setNome('');
       setQuantidade('');

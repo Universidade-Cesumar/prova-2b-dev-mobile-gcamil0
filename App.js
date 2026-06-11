@@ -88,5 +88,40 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 20, // Dá um espaçamento confortável entre as linhas do parágrafo
     marginBottom: 30, // Margem inferior para afastar o texto dos futuros inputs dos alunos
-  }
+  },
+  input: {
+  borderWidth: 1,
+  borderColor: '#ccc',
+  borderRadius: 8,
+  padding: 10,
+  marginBottom: 10,
+  fontSize: 16,
+  },
+  botao: {
+    backgroundColor: '#2a7ae2',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  botaoTexto: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  item: {
+    padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  itemNome: {
+    fontSize: 15,
+    color: '#333',
+  },
+  itemQtd: {
+    fontSize: 15,
+    color: '#888',
+  },
 });

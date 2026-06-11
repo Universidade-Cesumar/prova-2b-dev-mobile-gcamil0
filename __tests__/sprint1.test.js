@@ -10,7 +10,7 @@ describe('🚀 Testes Automatizados - Sprint 1 (Fundação e Inventário)', () =
     expect(getByTestId('input-nome')).toBeTruthy();
     expect(getByTestId('input-quantidade')).toBeTruthy();
     expect(getByTestId('btn-cadastrar')).toBeTruthy();
-    expect(getByTestId('lista-materials')).toBeTruthy(); // Ajustado conforme nomenclatura do contrato
+    expect(getByTestId('lista-materiais')).toBeTruthy(); // Ajustado conforme nomenclatura do contrato
   });
 
   test('👉 [0,5 pt] Inputs devem aceitar a digitação dos dados normalmente', () => {

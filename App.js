@@ -41,6 +41,16 @@ export default function App() {
           quantidade: parseInt(quantidade, 10),
         }),
       });
+      
+      // limpa os campos depois de cadastrar
+      setNome('');
+      setQuantidade('');
+
+      // atualiza lista depois de cadastrar
+      buscarMateriais();
+    } catch (erro) {
+      console.log('erro ao cadastrar material:', erro);
+    }
   };
 
   // executa a busca assim que o app abre

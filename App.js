@@ -24,7 +24,10 @@ export default function App() {
     }
   };
 
-  []);
+    // executa a busca assim que o app abre
+    useEffect(() => {
+      buscarMateriais();
+    }, []);
 
   return (
     <View style={styles.container}>

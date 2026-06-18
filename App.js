@@ -70,7 +70,35 @@ export default function App() {
       console.log('erro ao excluir o material:', erro);
     }
   };
-  
+  // realiza baixa do estoque 
+  const retirarMaterial = async (item) => {
+    const quantidadeRetirada = parseInt(retiradas[item.id] || '0', 10);
+
+    //valida a retirada
+    if(!validarRetirada(item.quantidade, quantidadeRetirada)) {
+      alert('Quantidade inválida para retirada!');
+      return;
+    }
+
+    try {
+      await fetch('${API_URL}/${item.id}', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quantidade: item.quantidade - quantidadeRetirada,
+        }),
+      });
+
+      //limpa o campo de retirada
+      atualizarRetirada(item.id, '');
+      //atualiza a lista
+      buscarMateriais();
+    } catch (erro) {
+      console.log('erro ao retirar material:', erro);
+    }
+  };
   // executa a busca assim que o app abre
   useEffect(() => {
     buscarMateriais();

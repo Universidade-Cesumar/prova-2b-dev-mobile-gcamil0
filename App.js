@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Alert, Platform } from 'react-native';
 import { validarRetirada } from './src/utils/validacoes'; //função de validar retirada
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Alert } from 'react-native';
+
 
 const API_URL = 'https://6a2b3903b687a7d5cbc4f932.mockapi.io/api/v1/materiais';
 
@@ -59,30 +59,36 @@ export default function App() {
     setRetiradas((anterior) => ({ ...anterior, [id]: valor}));
   };
   // remove o material da lista
+  // remove o material da api, com confirmação antes
   const excluirMaterial = (id) => {
-  Alert.alert(
-    'Confirmar exclusão',
-    'Tem certeza que deseja excluir este material?',
-    [
-      { text: 'Cancelar', style: 'cancel' },
-      {
-        text: 'Excluir',
-        style: 'destructive',
-        onPress: async () => {
-          try {
-            await fetch(`${API_URL}/${id}`, {
-              method: 'DELETE',
-            });
+    const confirmarExclusao = async () => {
+      try {
+        await fetch(`${API_URL}/${id}`, {
+          method: 'DELETE',
+        });
 
-            buscarMateriais();
-          } catch (erro) {
-            console.log('erro ao excluir o material:', erro);
-          }
-        },
-      },
-    ]
-  );
-};
+        buscarMateriais();
+      } catch (erro) {
+        console.log('erro ao excluir o material:', erro);
+      }
+    };
+
+    // no navegador o Alert.alert não funciona, então usamos window.confirm
+    if (Platform.OS === 'web') {
+      if (window.confirm('Tem certeza que deseja excluir este material?')) {
+        confirmarExclusao();
+      }
+    } else {
+      Alert.alert(
+        'Confirmar exclusão',
+        'Tem certeza que deseja excluir este material?',
+        [
+          { text: 'Cancelar', style: 'cancel' },
+          { text: 'Excluir', style: 'destructive', onPress: confirmarExclusao },
+        ]
+      );
+    }
+  };
   // realiza baixa do estoque 
   const retirarMaterial = async (item) => {
     const quantidadeRetirada = parseInt(retiradas[item.id] || '0', 10);

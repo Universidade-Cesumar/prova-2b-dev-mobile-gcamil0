@@ -176,6 +176,14 @@ export default function App() {
                   >
                     <Text style={styles.botaoAcaoTexto}>Baixar</Text>
                   </TouchableOpacity>
+                  {/* botão para excluir o material */}
+                  <TouchableOpacity
+                    testID="btn-excluir"
+                    style={styles.botaoExcluir}
+                    onPress={() => excluirMaterial(item.id)}
+                  >
+                    <Text style={styles.botaoAcaoTexto}>Excluir</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
               
@@ -282,5 +290,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 13,
+  },
+  botaoExcluir: {
+    backgroundColor: '#e74c3c',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
   },
 });

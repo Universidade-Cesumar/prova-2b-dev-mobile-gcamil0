@@ -168,8 +168,17 @@ export default function App() {
                     onChangeText={(valor) => atualizarRetirada(item.id, valor)}
                     keyboardType="numeric"
                   />
+                  {/* botão para confirmar a baixa de estoque */}
+                  <TouchableOpacity
+                    testID="btn-baixar"
+                    style={styles.botaoBaixar}
+                    onPress={() => retirarMaterial(item)}
+                  >
+                    <Text style={styles.botaoAcaoTexto}>Baixar</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
+              
             )}
           />
         )}
@@ -250,10 +259,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
   },
   itemAcoes: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  marginTop: 8,
-  gap: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    gap: 6,
   },
   inputRetirada: {
     borderWidth: 1,
@@ -262,5 +271,16 @@ const styles = StyleSheet.create({
     padding: 6,
     width: 80,
     fontSize: 14,
+  },
+  botaoBaixar: {
+    backgroundColor: '#f0a500',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+  },
+  botaoAcaoTexto: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 13,
   },
 });

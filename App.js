@@ -9,7 +9,7 @@ export default function App() {
   const [quantidade, setQuantidade] = useState(''); // estado para o campo da qtd do material
   const [materiais, setMateriais] = useState([]); // lista de materiais
   const [carregando, setCarregando] = useState(true); // controla se está carregando os dados
-
+  const [retirada, setRetiradas] = useState({}); //guarda a quantidade de retirada digirada para cada item
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
   // busca os materiais cadastrados na api
@@ -54,6 +54,9 @@ export default function App() {
     }
   };
 
+  const atualizarRetirada = (id, valor) => {
+    setRetiradas((anterior) => ({ ...anterior, [id]: valor}));
+  };
   // executa a busca assim que o app abre
   useEffect(() => {
     buscarMateriais();

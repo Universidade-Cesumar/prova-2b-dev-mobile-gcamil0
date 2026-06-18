@@ -171,7 +171,7 @@ export default function App() {
             data={materiais}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={styles.item}>
+              <View style={[styles.item, item.quantidade <= 5 && styles.itemEstoqueBaixo]}>
 
                 {/* informações do material */}
                 <Text style={styles.itemNome}>{item.nome}</Text>
@@ -315,5 +315,9 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 6,
+  },
+  itemEstoqueBaixo: {
+    borderLeftWidth: 4,
+    borderLeftColor: '#e74c3c',
   },
 });

@@ -10,7 +10,7 @@ export default function App() {
   const [quantidade, setQuantidade] = useState(''); // estado para o campo da qtd do material
   const [materiais, setMateriais] = useState([]); // lista de materiais
   const [carregando, setCarregando] = useState(true); // controla se está carregando os dados
-  const [retirada, setRetiradas] = useState({}); //guarda a quantidade de retirada digirada para cada item
+  const [retiradas, setRetiradas] = useState({}); //guarda a quantidade de retirada digirada para cada item
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
   // busca os materiais cadastrados na api
@@ -60,7 +60,7 @@ export default function App() {
   // remove o material da lista
   const excluirMaterial = async (id) => {
     try {
-      await fetch('${API_URL}/${id}', {
+      await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
       });
 
@@ -73,7 +73,7 @@ export default function App() {
   // realiza baixa do estoque 
   const retirarMaterial = async (item) => {
     const quantidadeRetirada = parseInt(retiradas[item.id] || '0', 10);
-
+    console.log('retirando', quantidadeRetirada, 'de', item.quantidade);
     //valida a retirada
     if(!validarRetirada(item.quantidade, quantidadeRetirada)) {
       alert('Quantidade inválida para retirada!');
@@ -81,7 +81,7 @@ export default function App() {
     }
 
     try {
-      await fetch('${API_URL}/${item.id}', {
+      await fetch(`${API_URL}/${item.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -153,8 +153,22 @@ export default function App() {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.item}>
+
+                {/* informações do material */}
                 <Text style={styles.itemNome}>{item.nome}</Text>
                 <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+
+                {/* área de ações do item */}
+                <View style={styles.itemAcoes}>
+                  <TextInput
+                    testID="input-retirada"
+                    style={styles.inputRetirada}
+                    placeholder="Qtd retirar"
+                    value={retiradas[item.id] || ''}
+                    onChangeText={(valor) => atualizarRetirada(item.id, valor)}
+                    keyboardType="numeric"
+                  />
+                </View>
               </View>
             )}
           />
@@ -234,5 +248,19 @@ const styles = StyleSheet.create({
   separador: {
     height: 1,
     backgroundColor: '#eee',
+  },
+  itemAcoes: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginTop: 8,
+  gap: 6,
+  },
+  inputRetirada: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 6,
+    padding: 6,
+    width: 80,
+    fontSize: 14,
   },
 });

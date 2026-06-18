@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { validarRetirada } from './src/utils/validacoes'; //função de validar retirada
 
 const API_URL = 'https://6a2b3903b687a7d5cbc4f932.mockapi.io/api/v1/materiais';
 
@@ -24,7 +25,6 @@ export default function App() {
       setCarregando(false);
     }
   };
-
   // salva novo material na api
   const cadastrarMaterial = async () => {
     if (!nome || !quantidade) {
@@ -53,10 +53,24 @@ export default function App() {
       console.log('erro ao cadastrar material:', erro);
     }
   };
-
+  // atualiza a quantidade de retirada de um material
   const atualizarRetirada = (id, valor) => {
     setRetiradas((anterior) => ({ ...anterior, [id]: valor}));
   };
+  // remove o material da lista
+  const excluirMaterial = async (id) => {
+    try {
+      await fetch('${API_URL}/${id}', {
+        method: 'DELETE',
+      });
+
+      //atualiza a lista
+      buscarMateriais();
+    } catch (erro) {
+      console.log('erro ao excluir o material:', erro);
+    }
+  };
+  
   // executa a busca assim que o app abre
   useEffect(() => {
     buscarMateriais();

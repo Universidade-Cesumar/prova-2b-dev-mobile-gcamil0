@@ -174,8 +174,10 @@ export default function App() {
               <View style={[styles.item, item.quantidade <= 5 && styles.itemEstoqueBaixo]}>
 
                 {/* informações do material */}
-                <Text style={styles.itemNome}>{item.nome}</Text>
-                <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+                  <View style={styles.itemInfo}>
+                    <Text style={styles.itemNome}>{item.nome}</Text>
+                    <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+                  </View>
 
                 {/* área de ações do item */}
                 <View style={styles.itemAcoes}>
@@ -259,8 +261,11 @@ const styles = StyleSheet.create({
     padding: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
+  },
+  itemInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 4,
   },
   itemNome: {
     fontSize: 15,

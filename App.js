@@ -161,7 +161,7 @@ export default function App() {
 
         {/* mostra um indicador enquanto carrega, senão mostra a lista */}
         {carregando ? (
-          <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />
+          <ActivityIndicator size="large" color="#2e9e5b" style={{ marginTop: 20 }} />
         ) : (
           <FlatList
             ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   botao: {
-    backgroundColor: '#2a7ae2',
+    backgroundColor: '#2e9e5b',
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',

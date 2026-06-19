@@ -61,3 +61,13 @@ prova-2b-dev-mobile-gcamil0/
 - [x] Integração com MockAPI (GET e POST)
 - [x] Carregamento com ActivityIndicator
 - [x] Validação básica dos campos antes de enviar
+
+## Funcionalidades da Sprint 2
+
+- [x] Campo de retirada (baixa de estoque) individual por item da lista
+- [x] Botão de confirmação de baixa, integrado via PUT à MockAPI
+- [x] Botão de exclusão de material, integrado via DELETE à MockAPI
+- [x] Função pura `validarRetirada` impedindo retiradas negativas ou maiores que o estoque atual
+- [x] Confirmação antes da exclusão (Alert no mobile, confirm no navegador)
+- [x] Destaque visual para materiais com estoque baixo (≤ 5 unidades)
+- [x] Testes unitários da função `validarRetirada` cobrindo casos válidos e inválidos

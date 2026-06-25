@@ -31,6 +31,7 @@ export default function App() {
       setMateriais(dados);
     } catch (erro) {
       console.log('erro ao buscar materiais:', erro);
+      exibirAlerta('Erro de conexão', 'Não foi possível carregar os materiais. Verifique sua internet.');
     } finally {
       setCarregando(false);
     }
@@ -61,6 +62,7 @@ export default function App() {
       buscarMateriais();
     } catch (erro) {
       console.log('erro ao cadastrar material:', erro);
+      exibirAlerta('Erro ao cadastrar', 'Não foi possível salvar o material. Tente novamente.');
     }
   };
   // atualiza a quantidade de retirada de um material

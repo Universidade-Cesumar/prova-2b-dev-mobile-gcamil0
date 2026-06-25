@@ -12,6 +12,7 @@ export default function App() {
   const [materiais, setMateriais] = useState([]); // lista de materiais
   const [carregando, setCarregando] = useState(true); // controla se está carregando os dados
   const [retiradas, setRetiradas] = useState({}); //guarda a quantidade de retirada digirada para cada item
+  const [busca, setBusca] = useState(''); // texto digitado no campo de pesquisa
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
   // busca os materiais cadastrados na api
@@ -163,7 +164,14 @@ export default function App() {
         {carregando && (
           <ActivityIndicator size="large" color="#2e9e5b" style={{ marginTop: 20 }} />
         )}
-
+        {/* campo de busca para filtrar a lista */}
+        <TextInput
+          testID="input-busca"
+          style={styles.input}
+          placeholder="Buscar material..."
+          value={busca}
+          onChangeText={setBusca}
+        />
         <FlatList
           ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
           ListEmptyComponent={

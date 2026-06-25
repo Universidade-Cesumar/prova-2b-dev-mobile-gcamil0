@@ -69,7 +69,7 @@ export default function App() {
   const atualizarRetirada = (id, valor) => {
     setRetiradas((anterior) => ({ ...anterior, [id]: valor}));
   };
-  // remove o material da lista
+  
   // remove o material da api, com confirmação antes
   const excluirMaterial = (id) => {
     const confirmarExclusao = async () => {
@@ -81,6 +81,7 @@ export default function App() {
         buscarMateriais();
       } catch (erro) {
         console.log('erro ao excluir o material:', erro);
+        exibirAlerta('Erro ao excluir', 'Não foi possível excluir o material. Tente novamente.');
       }
     };
 
@@ -127,6 +128,7 @@ export default function App() {
       buscarMateriais();
     } catch (erro) {
       console.log('erro ao retirar material:', erro);
+      exibirAlerta('Erro ao retirar estoque', 'Não foi possível processar a baixa. Tente novamente.');
     }
   };
   // executa a busca assim que o app abre

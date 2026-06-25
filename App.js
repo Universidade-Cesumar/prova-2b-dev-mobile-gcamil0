@@ -160,58 +160,57 @@ export default function App() {
         </TouchableOpacity>
 
         {/* mostra um indicador enquanto carrega, senão mostra a lista */}
-        {carregando ? (
+        {carregando && (
           <ActivityIndicator size="large" color="#2e9e5b" style={{ marginTop: 20 }} />
-        ) : (
-          <FlatList
-            ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
-            ListEmptyComponent={<Text style={styles.listaVazia}>Nenhum material cadastrado.</Text>}
-            ItemSeparatorComponent={() => <View style={styles.separador} />}
-            testID="lista-materiais"
-            data={materiais}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <View style={[styles.item, item.quantidade <= 5 && styles.itemEstoqueBaixo]}>
-
-                {/* informações do material */}
-                  <View style={styles.itemInfo}>
-                    <Text style={styles.itemNome}>{item.nome}</Text>
-                    <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
-                  </View>
-
-                {/* área de ações do item */}
-                <View style={styles.itemAcoes}>
-                  <TextInput
-                    testID="input-retirada"
-                    style={styles.inputRetirada}
-                    placeholder="Qtd retirar"
-                    value={retiradas[item.id] || ''}
-                    onChangeText={(valor) => atualizarRetirada(item.id, valor)}
-                    keyboardType="numeric"
-                  />
-                  {/* botão para confirmar a baixa de estoque */}
-                  <TouchableOpacity
-                    testID="btn-baixar"
-                    style={styles.botaoBaixar}
-                    onPress={() => retirarMaterial(item)}
-                  >
-                    <Text style={styles.botaoAcaoTexto}>Baixar</Text>
-                  </TouchableOpacity>
-                  {/* botão para excluir o material */}
-                  <TouchableOpacity
-                    testID="btn-excluir"
-                    style={styles.botaoExcluir}
-                    onPress={() => excluirMaterial(item.id)}
-                  >
-                    <Text style={styles.botaoAcaoTexto}>Excluir</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-              
-            )}
-          />
         )}
-      
+
+        <FlatList
+          ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
+          ListEmptyComponent={
+            carregando
+              ? null
+              : <Text style={styles.listaVazia}>Nenhum material cadastrado.</Text>
+          }
+          ItemSeparatorComponent={() => <View style={styles.separador} />}
+          testID="lista-materiais"
+          data={materiais}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={[styles.item, item.quantidade <= 5 && styles.itemEstoqueBaixo]}>
+
+              <View style={styles.itemInfo}>
+                <Text style={styles.itemNome}>{item.nome}</Text>
+                <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+              </View>
+
+              <View style={styles.itemAcoes}>
+                <TextInput
+                  testID="input-retirada"
+                  style={styles.inputRetirada}
+                  placeholder="Qtd retirar"
+                  value={retiradas[item.id] || ''}
+                  onChangeText={(valor) => atualizarRetirada(item.id, valor)}
+                  keyboardType="numeric"
+                />
+                <TouchableOpacity
+                  testID="btn-baixar"
+                  style={styles.botaoBaixar}
+                  onPress={() => retirarMaterial(item)}
+                >
+                  <Text style={styles.botaoAcaoTexto}>Baixar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  testID="btn-excluir"
+                  style={styles.botaoExcluir}
+                  onPress={() => excluirMaterial(item.id)}
+                >
+                  <Text style={styles.botaoAcaoTexto}>Excluir</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+        />
+              
     </View>
   );
 }

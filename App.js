@@ -21,6 +21,7 @@ export default function App() {
   const [carregando, setCarregando] = useState(true); // controla se está carregando os dados
   const [retiradas, setRetiradas] = useState({}); //guarda a quantidade de retirada digirada para cada item
   const [busca, setBusca] = useState(''); // texto digitado no campo de pesquisa
+  const [validade, setValidade] = useState(''); // data de validade no formato aaaa-mm-dd
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
   // busca os materiais cadastrados na api
@@ -171,7 +172,13 @@ export default function App() {
           onChangeText={setQuantidade}
           keyboardType="numeric"
         />
-
+        {/* campo de validade do material */}
+        <TextInput
+          style={styles.input}
+          placeholder="Validade (aaaa-mm-dd)"
+          value={validade}
+          onChangeText={setValidade}
+        />
         {/* botão para cadastrar o material */}
         <TouchableOpacity testID="btn-cadastrar" style={styles.botao} onPress={cadastrarMaterial}>
           <Text style={styles.botaoTexto}>Cadastrar</Text>

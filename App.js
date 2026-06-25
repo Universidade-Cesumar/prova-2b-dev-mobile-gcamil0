@@ -343,4 +343,9 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     borderLeftColor: '#e74c3c',
   },
+  totalItens: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 8,
+  },
 });

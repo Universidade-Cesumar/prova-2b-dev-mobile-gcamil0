@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Alert, Platform } from 'react-native';
 import { validarRetirada } from './src/utils/validacoes'; //função de validar retirada
 
+// exibe um alerta multiplataforma (web usa alert nativo, mobile usa Alert do RN)
+const exibirAlerta = (titulo, mensagem) => {
+  if (Platform.OS === 'web') {
+    window.alert(`${titulo}\n\n${mensagem}`);
+  } else {
+    Alert.alert(titulo, mensagem);
+  }
+};
 
 const API_URL = 'https://6a2b3903b687a7d5cbc4f932.mockapi.io/api/v1/materiais';
 

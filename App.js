@@ -173,12 +173,13 @@ export default function App() {
           onChangeText={setQuantidade}
           keyboardType="numeric"
         />
-        {/* campo de validade do material */}
+        {/* campo de validade, desabilitado quando indeterminada */}
         <TextInput
-          style={styles.input}
+          style={[styles.input, validadeIndeterminada && styles.inputDesabilitado]}
           placeholder="Validade (aaaa-mm-dd)"
-          value={validade}
+          value={validadeIndeterminada ? '' : validade}
           onChangeText={setValidade}
+          editable={!validadeIndeterminada}
         />
         {/* checkbox simulado para validade indeterminada */}
         <TouchableOpacity
@@ -408,5 +409,9 @@ const styles = StyleSheet.create({
   checkboxTexto: {
     fontSize: 13,
     color: '#666',
+  },
+  inputDesabilitado: {
+    backgroundColor: '#f0f0f0',
+    color: '#999',
   },
 });

@@ -22,6 +22,7 @@ export default function App() {
   const [retiradas, setRetiradas] = useState({}); //guarda a quantidade de retirada digirada para cada item
   const [busca, setBusca] = useState(''); // texto digitado no campo de pesquisa
   const [validade, setValidade] = useState(''); // data de validade no formato aaaa-mm-dd
+  const [validadeIndeterminada, setValidadeIndeterminada] = useState(false); // true para materiais permanentes
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
   // busca os materiais cadastrados na api
@@ -179,6 +180,16 @@ export default function App() {
           value={validade}
           onChangeText={setValidade}
         />
+        {/* checkbox simulado para validade indeterminada */}
+        <TouchableOpacity
+          style={styles.checkboxLinha}
+          onPress={() => setValidadeIndeterminada((anterior) => !anterior)}
+        >
+          <View style={[styles.checkbox, validadeIndeterminada && styles.checkboxMarcado]}>
+            {validadeIndeterminada && <Text style={styles.checkboxIcone}>✓</Text>}
+          </View>
+          <Text style={styles.checkboxTexto}>Validade indeterminada (material permanente)</Text>
+        </TouchableOpacity>
         {/* botão para cadastrar o material */}
         <TouchableOpacity testID="btn-cadastrar" style={styles.botao} onPress={cadastrarMaterial}>
           <Text style={styles.botaoTexto}>Cadastrar</Text>
@@ -369,5 +380,33 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#666',
     marginBottom: 8,
+  },
+  checkboxLinha: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    gap: 8,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkboxMarcado: {
+    backgroundColor: '#2e9e5b',
+    borderColor: '#2e9e5b',
+  },
+  checkboxIcone: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  checkboxTexto: {
+    fontSize: 13,
+    color: '#666',
   },
 });

@@ -124,6 +124,11 @@ export default function App() {
     buscarMateriais();
   }, []);
 
+  // filtra os materiais pelo nome digitado na busca
+  const materiaisFiltrados = materiais.filter((item) =>
+    item.nome.toLowerCase().includes(busca.toLowerCase())
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Almoxarifado - Enfermagem</Text>
@@ -172,6 +177,12 @@ export default function App() {
           value={busca}
           onChangeText={setBusca}
         />
+
+        {/* mostra quantos itens estão sendo exibidos na lista filtrada */}
+        <Text testID="total-itens" style={styles.totalItens}>
+          {materiaisFiltrados.length} {materiaisFiltrados.length === 1 ? 'item encontrado' : 'itens encontrados'}
+        </Text>
+
         <FlatList
           ListHeaderComponent={<Text style={styles.listaTitle}>Materiais em estoque</Text>}
           ListEmptyComponent={
@@ -181,7 +192,7 @@ export default function App() {
           }
           ItemSeparatorComponent={() => <View style={styles.separador} />}
           testID="lista-materiais"
-          data={materiais}
+          data={materiaisFiltrados}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={[styles.item, item.quantidade <= 5 && styles.itemEstoqueBaixo]}>

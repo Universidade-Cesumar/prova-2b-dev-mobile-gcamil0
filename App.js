@@ -53,13 +53,15 @@ export default function App() {
         body: JSON.stringify({
           nome: nome,
           quantidade: parseInt(quantidade, 10),
+          validade: validadeIndeterminada ? '' : validade,
         }),
       });
 
       // limpa os campos depois de cadastrar
       setNome('');
       setQuantidade('');
-
+      setValidade('');
+      setValidadeIndeterminada(false);
       // atualiza lista depois de cadastrar
       buscarMateriais();
     } catch (erro) {

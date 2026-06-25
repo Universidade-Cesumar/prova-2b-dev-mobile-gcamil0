@@ -145,6 +145,19 @@ export default function App() {
     item.nome.toLowerCase().includes(busca.toLowerCase())
   );
 
+  // calcula o status da validade de um material
+  const statusValidade = (validade) => {
+    if (!validade) return 'sem-validade';
+
+    const hoje = new Date();
+    const dataValidade = new Date(validade);
+    const diasRestantes = Math.ceil((dataValidade - hoje) / (1000 * 60 * 60 * 24));
+
+    if (diasRestantes < 0) return 'vencido';
+    if (diasRestantes <= 30) return 'vencendo';
+    return 'normal';
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Almoxarifado - Enfermagem</Text>
@@ -415,5 +428,17 @@ const styles = StyleSheet.create({
   inputDesabilitado: {
     backgroundColor: '#f0f0f0',
     color: '#999',
+  },
+  itemValidadeNormal: {
+    borderLeftWidth: 4,
+    borderLeftColor: '#ccc',
+  },
+  itemValidadeVencendo: {
+    borderLeftWidth: 4,
+    borderLeftColor: '#f0a500',
+  },
+  itemValidadeVencido: {
+    borderLeftWidth: 4,
+    borderLeftColor: '#e74c3c',
   },
 });

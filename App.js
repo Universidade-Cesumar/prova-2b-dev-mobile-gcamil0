@@ -69,9 +69,23 @@ export default function App() {
       exibirAlerta('Erro ao cadastrar', 'Não foi possível salvar o material. Tente novamente.');
     }
   };
-  // atualiza a quantidade de retirada de um material
-  const atualizarRetirada = (id, valor) => {
-    setRetiradas((anterior) => ({ ...anterior, [id]: valor}));
+  // atualiza a quantidade de retirada de um material, limitando ao estoque disponível
+  const atualizarRetirada = (id, valor, estoqueAtual) => {
+    // permite campo vazio (usuário ainda digitando ou apagando)
+    if (valor === '') {
+      setRetiradas((anterior) => ({ ...anterior, [id]: '' }));
+      return;
+    }
+
+    const valorNumerico = parseInt(valor, 10);
+
+    // se não for número válido, ignora a digitação
+    if (isNaN(valorNumerico)) return;
+
+    // limita ao máximo do estoque disponível
+    const valorLimitado = Math.min(valorNumerico, estoqueAtual);
+
+    setRetiradas((anterior) => ({ ...anterior, [id]: String(valorLimitado) }));
   };
   
   // remove o material da api, com confirmação antes
@@ -271,7 +285,37 @@ export default function App() {
                 </Text>
 
                 <View style={styles.itemAcoes}>
-                  ...
+                  {status === 'vencido' ? (
+                    <Text style={styles.avisoVencido}>Item vencido — retirada bloqueada</Text>
+                  ) : (
+                    <>
+                      <TextInput
+                        testID="input-retirada"
+                        style={styles.inputRetirada}
+                        placeholder="Qtd retirar"
+                        value={retiradas[item.id] || ''}
+                        onChangeText={(valor) => atualizarRetirada(item.id, valor, item.quantidade)}
+                        keyboardType="numeric"
+                      />
+                      <TouchableOpacity
+                        testID="btn-baixar"
+                        style={styles.botaoBaixar}
+                        onPress={() => retirarMaterial(item)}
+                      >
+                        <Text style={styles.botaoAcaoTexto}>Baixar</Text>
+                      </TouchableOpacity>
+                    </>
+                  )}
+
+                  <View style={{ flex: 1 }} />
+
+                  <TouchableOpacity
+                    testID="btn-excluir"
+                    style={styles.botaoExcluir}
+                    onPress={() => excluirMaterial(item.id)}
+                  >
+                    <Text style={styles.botaoAcaoTexto}>Excluir</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             );
@@ -444,5 +488,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#888',
     marginBottom: 6,
+  },
+  avisoVencido: {
+    fontSize: 13,
+    color: '#e74c3c',
+    fontWeight: 'bold',
   },
 });

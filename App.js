@@ -188,27 +188,31 @@ export default function App() {
       {/* Os alunos vão construir os componentes visuais das Sprints aqui dentro */}
 
         {/* campo para digitar o nome do material */}
+        <Text style={styles.label}>Nome do material</Text>
         <TextInput
           testID="input-nome"
           style={styles.input}
-          placeholder="Nome do material"
+          placeholder="Ex: Luva cirúrgica M"
           value={nome}
           onChangeText={setNome}
         />
 
         {/* campo para digitar a quantidade */}
+        <Text style={styles.label}>Quantidade</Text>
         <TextInput
           testID="input-quantidade"
           style={styles.input}
-          placeholder="Quantidade"
+          placeholder="Ex: 50"
           value={quantidade}
           onChangeText={setQuantidade}
           keyboardType="numeric"
         />
+
         {/* campo de validade, desabilitado quando indeterminada */}
+        <Text style={styles.label}>Validade</Text>
         <TextInput
           style={[styles.input, validadeIndeterminada && styles.inputDesabilitado]}
-          placeholder="Validade (aaaa-mm-dd)"
+          placeholder="aaaa-mm-dd"
           value={validadeIndeterminada ? '' : validade}
           onChangeText={setValidade}
           editable={!validadeIndeterminada}
@@ -507,5 +511,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#e74c3c',
     fontWeight: 'bold',
+  },
+  label: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 4,
+    fontWeight: '500',
   },
 });

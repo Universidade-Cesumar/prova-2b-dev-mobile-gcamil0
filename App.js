@@ -280,7 +280,11 @@ export default function App() {
 
                 <View style={styles.itemInfo}>
                   <Text style={styles.itemNome}>{item.nome}</Text>
-                  <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+                  <View style={[styles.badge, item.quantidade < 10 ? styles.badgeCritico : styles.badgeNormal]}>
+                    <Text style={[styles.badgeTexto, item.quantidade < 10 ? styles.badgeTextoCritico : styles.badgeTextoNormal]}>
+                      {item.quantidade} un
+                    </Text>
+                  </View>
                 </View>
 
                 {/* texto informativo sobre a validade do material */}
@@ -318,10 +322,10 @@ export default function App() {
 
                   <TouchableOpacity
                     testID="btn-excluir"
-                    style={styles.botaoExcluir}
+                    style={styles.botaoExcluirIcone}
                     onPress={() => excluirMaterial(item.id)}
                   >
-                    <Text style={styles.botaoAcaoTexto}>Excluir</Text>
+                    <Text style={styles.botaoExcluirTexto}>🗑</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -443,11 +447,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 13,
   },
-  botaoExcluir: {
-    backgroundColor: '#e74c3c',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 6,
+  botaoExcluirIcone: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderWidth: 1,
+    color: '#e74c3c',
+    borderColor: '#e74c3c',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  botaoExcluirTexto: {
+    color: '#e74c3c',
+    fontSize: 16,
   },
   itemEstoqueBaixo: {
     borderLeftWidth: 4,
@@ -517,5 +529,26 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 4,
     fontWeight: '500',
+  },
+  badge: {
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+  },
+  badgeNormal: {
+    backgroundColor: '#e3f5e9',
+  },
+  badgeCritico: {
+    backgroundColor: '#fce4e4',
+  },
+  badgeTexto: {
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  badgeTextoNormal: {
+    color: '#2e9e5b',
+  },
+  badgeTextoCritico: {
+    color: '#e74c3c',
   },
 });

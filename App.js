@@ -240,43 +240,42 @@ export default function App() {
           testID="lista-materiais"
           data={materiaisFiltrados}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View
-              style={[styles.item, item.quantidade < 10 && styles.itemEstoqueBaixo]}
-              accessibilityLabel={item.quantidade < 10 ? 'estoque-critico' : undefined}
-            >
+          renderItem={({ item }) => {
+            const status = statusValidade(item.validade);
+            const estiloValidade =
+              status === 'vencendo' ? styles.itemValidadeVencendo :
+              status === 'vencido' ? styles.itemValidadeVencido :
+              styles.itemValidadeNormal;
 
-              <View style={styles.itemInfo}>
-                <Text style={styles.itemNome}>{item.nome}</Text>
-                <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
-              </View>
+            return (
+              <View
+                style={[
+                  styles.item,
+                  item.quantidade < 10 && styles.itemEstoqueBaixo,
+                  estiloValidade,
+                ]}
+                accessibilityLabel={item.quantidade < 10 ? 'estoque-critico' : undefined}
+              >
 
-              <View style={styles.itemAcoes}>
-                <TextInput
-                  testID="input-retirada"
-                  style={styles.inputRetirada}
-                  placeholder="Qtd retirar"
-                  value={retiradas[item.id] || ''}
-                  onChangeText={(valor) => atualizarRetirada(item.id, valor)}
-                  keyboardType="numeric"
-                />
-                <TouchableOpacity
-                  testID="btn-baixar"
-                  style={styles.botaoBaixar}
-                  onPress={() => retirarMaterial(item)}
-                >
-                  <Text style={styles.botaoAcaoTexto}>Baixar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  testID="btn-excluir"
-                  style={styles.botaoExcluir}
-                  onPress={() => excluirMaterial(item.id)}
-                >
-                  <Text style={styles.botaoAcaoTexto}>Excluir</Text>
-                </TouchableOpacity>
+                <View style={styles.itemInfo}>
+                  <Text style={styles.itemNome}>{item.nome}</Text>
+                  <Text style={styles.itemQtd}>Qtd: {item.quantidade}</Text>
+                </View>
+
+                {/* texto informativo sobre a validade do material */}
+                <Text style={styles.itemValidadeTexto}>
+                  {status === 'sem-validade' && 'Sem validade'}
+                  {status === 'normal' && `Validade: ${item.validade}`}
+                  {status === 'vencendo' && `Atenção: vence em breve (${item.validade})`}
+                  {status === 'vencido' && `Vencido em ${item.validade}`}
+                </Text>
+
+                <View style={styles.itemAcoes}>
+                  ...
+                </View>
               </View>
-            </View>
-          )}
+            );
+          }}
         />
               
     </View>
@@ -440,5 +439,10 @@ const styles = StyleSheet.create({
   itemValidadeVencido: {
     borderLeftWidth: 4,
     borderLeftColor: '#e74c3c',
+  },
+  itemValidadeTexto: {
+    fontSize: 12,
+    color: '#888',
+    marginBottom: 6,
   },
 });

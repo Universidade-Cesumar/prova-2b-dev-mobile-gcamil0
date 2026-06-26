@@ -71,3 +71,21 @@ prova-2b-dev-mobile-gcamil0/
 - [x] Confirmação antes da exclusão (Alert no mobile, confirm no navegador)
 - [x] Destaque visual para materiais com estoque baixo (≤ 5 unidades)
 - [x] Testes unitários da função `validarRetirada` cobrindo casos válidos e inválidos
+
+## Funcionalidades da Sprint 3
+
+- [x] Campo de busca com filtragem dinâmica da lista por nome
+- [x] Totalizador exibindo a contagem de itens filtrados
+- [x] Indicador visual de estoque crítico (quantidade menor que 10), com `accessibilityLabel="estoque-critico"`
+- [x] Tratamento de erros de rede com alertas amigáveis em todas as requisições (GET, POST, PUT, DELETE)
+
+## Funcionalidades Extras
+- [x] Campo de validade com suporte a "validade indeterminada" para materiais permanentes
+- [x] Indicador visual de validade (vencendo, vencido, sem validade)
+- [x] Bloqueio de retirada para materiais vencidos
+- [x] Auto-limitação da quantidade de retirada ao estoque disponível
+- [x] Redesign visual completo (header, badges, labels, ícones)
+
+## Screenshots
+
+![TelaPrincipal](design/Tela.png)

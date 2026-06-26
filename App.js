@@ -173,9 +173,12 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Almoxarifado - Enfermagem</Text>
-      
+        <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Almoxarifado · Enfermagem</Text>
+        <Text style={styles.subtitulo}>Controle de materiais em tempo real</Text>
+      </View>
+
       {/* Breve descrição do projeto inserida abaixo */}
       <Text style={styles.description}>
         Este template servirá para desenvolver o projeto responsável por modernizar o controle de insumos médicos do almoxarifado. 
@@ -330,22 +333,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 50,
-    paddingHorizontal: 20,
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 10, // Reduzido ligeiramente para aproximar o texto explicativo
-    color: '#333',
+    color: '#fff',
+  },
+  header: {
+    backgroundColor: '#2e9e5b',
+    paddingTop: 50,
+    paddingBottom: 16,
+    paddingHorizontal: 20,
+  },
+  subtitulo: {
+    fontSize: 13,
+    color: '#e8f5ec',
+    textAlign: 'center',
+    marginTop: 4,
   },
   description: {
     fontSize: 14,
     color: '#666',
     textAlign: 'center',
     lineHeight: 20, // Dá um espaçamento confortável entre as linhas do parágrafo
+    marginTop: 20,
     marginBottom: 30, // Margem inferior para afastar o texto dos futuros inputs dos alunos
+    paddingHorizontal: 20,
   },
   input: {
     borderWidth: 1,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Alert, Platform } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Alert, Platform, ScrollView } from 'react-native';
 import { validarRetirada } from './src/utils/validacoes'; //função de validar retirada
 
 // exibe um alerta multiplataforma (web usa alert nativo, mobile usa Alert do RN)
@@ -172,9 +172,9 @@ export default function App() {
     return 'normal';
   };
 
-  return (
-        <View style={styles.container}>
-      <View style={styles.header}>
+ return (
+  <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+    <View style={styles.header}>
         <Text style={styles.title}>Almoxarifado · Enfermagem</Text>
         <Text style={styles.subtitulo}>Controle de materiais em tempo real</Text>
       </View>
@@ -330,10 +330,12 @@ export default function App() {
                 </View>
               </View>
             );
-          }}
-        />
-              
-    </View>
+          }
+        }
+          scrollEnabled={false}
+      />
+          
+    </ScrollView>
   );
 }
 
@@ -341,6 +343,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  scrollContent: {
+    paddingBottom: 30,
   },
   title: {
     fontSize: 22,
